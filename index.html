@@ -97,6 +97,28 @@ section.group { display: grid; gap: 12px; padding-block: 18px 4px; }
 .price.ask { font-size: 19px; color: var(--accent); }
 .acciones { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
 .acciones .btn { flex: 1 1 auto; }
+.btn.oferta { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+.acciones .btn.oferta { flex-basis: 100%; }
+.consulta .btn.oferta { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+/* Hacé tu oferta: el piso no se muestra; debajo de él la oferta no sale */
+#oferta { width: min(480px, calc(100vw - 24px)); }
+#oferta form { padding: 16px; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+#oferta form > * { min-width: 0; }
+.of-que .desc, .of-que li, .of-pub { overflow-wrap: anywhere; }
+#oferta h2 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 26px; text-transform: uppercase; }
+.of-que { display: grid; gap: 4px; padding: 10px 12px; background: var(--bg); border-radius: var(--r); }
+.of-que ul { margin: 0; padding-left: 18px; display: grid; gap: 2px; font-size: 13px; }
+.of-que .desc { font-size: 16px; }
+.of-pub { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.campo { display: grid; gap: 4px; font-weight: 600; font-size: 14px; }
+.campo select { justify-self: start; }
+.monto { display: flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); padding: 0 12px; }
+.monto span { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--muted); }
+.monto input { all: unset; flex: 1; min-width: 0; width: 100%; font-family: var(--font-display); font-size: 26px; font-weight: 700; padding: 8px 0; font-variant-numeric: tabular-nums; }
+.monto:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.aviso { margin: 0; color: var(--accent); font-weight: 600; min-height: 1.45em; }
+.nota { margin: 0; font-size: 13px; color: var(--muted); }
 .empty { padding: 40px 0; color: var(--muted); text-align: center; }
 
 .consulta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 8; background: var(--ink); color: var(--bg); padding-bottom: env(safe-area-inset-bottom, 0px); }
@@ -129,9 +151,9 @@ dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
 </div>
 <header class="wrap top">
   <h1>Oferta chapa <span>·</span> Falcon, Taunus y F100</h1>
-  <p class="lead" id="lead">Liquidamos repuestos de chapa y carrocería discontinuados: paneles de puerta, guardabarros, paragolpes, tapizados, parrillas y más. Son las últimas unidades que nos quedan.</p>
+  <p class="lead" id="lead">Liquidamos repuestos de chapa y carrocería discontinuados: paneles de puerta, guardabarros, paragolpes, tapizados, parrillas y más. Son las últimas unidades que nos quedan. <strong>Hacé tu oferta</strong> por la pieza que te interese: revisamos todas y te contestamos por WhatsApp.</p>
   <div class="lote">
-    <p><strong>¿Buscás varias piezas o el lote completo?</strong> Marcá las que te interesan y mandanos la consulta por WhatsApp: armamos precio por cantidad.</p>
+    <p><strong>¿Buscás varias piezas o el lote completo?</strong> Marcá las que te interesan y hacé una oferta por todo junto, o mandanos la consulta por WhatsApp.</p>
     <a class="btn wa" id="wa-lote" href="https://wa.me/542214084894" target="_blank" rel="noopener">Consultar por el lote</a>
   </div>
 </header>
@@ -166,6 +188,7 @@ dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
   <div class="wrap">
     <p id="consulta-texto"></p>
     <button class="btn vaciar small" id="vaciar" type="button">Vaciar</button>
+    <button class="btn oferta" id="oferta-sel" type="button">Ofertar por todo</button>
     <a class="btn wa" id="wa-sel" href="#" target="_blank" rel="noopener">Consultar por WhatsApp</a>
   </div>
 </div>
@@ -173,6 +196,23 @@ dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
 <dialog id="zoom" aria-label="Detalle del repuesto">
   <div class="big" id="zoom-img"></div>
   <div class="info" id="zoom-info"></div>
+</dialog>
+
+<dialog id="oferta" aria-labelledby="oferta-titulo">
+  <form id="oferta-form" novalidate>
+    <h2 id="oferta-titulo">Hacé tu oferta</h2>
+    <div class="of-que" id="oferta-que"></div>
+    <label class="campo" id="oferta-cant-campo">Cantidad <select id="oferta-cant"></select></label>
+    <label class="campo"><span id="oferta-label">Tu oferta (con IVA)</span>
+      <span class="monto"><span>$</span><input id="oferta-monto" inputmode="numeric" autocomplete="off" placeholder="0" aria-describedby="oferta-aviso"></span>
+    </label>
+    <p class="aviso" id="oferta-aviso" role="alert"></p>
+    <p class="nota">Revisamos cada oferta y te respondemos por WhatsApp.</p>
+    <div class="acciones">
+      <button class="btn wa" type="submit">Enviar oferta por WhatsApp</button>
+      <button class="btn" type="button" id="oferta-cancelar">Cancelar</button>
+    </div>
+  </form>
 </dialog>
 
 <script>
@@ -224,6 +264,7 @@ dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
         <div class="acciones">
           <button class="btn small" type="button" data-sel="${esc(a.art)}" aria-pressed="${elegido}">${elegido ? "✓ Elegida" : "+ Elegir"}</button>
           <a class="btn wa small" href="${waLink("Hola! Me interesa este repuesto de la Oferta Chapa: " + linea(a))}" target="_blank" rel="noopener">Consultar</a>
+          ${a.precio == null ? "" : `<button class="btn small oferta" type="button" data-oferta="${esc(a.art)}">Hacé tu oferta</button>`}
         </div>
       </div>
     </article>`;
@@ -251,7 +292,77 @@ dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
     const suma = elegidos.reduce((s, a) => s + (a.precio || 0), 0), sinPrecio = elegidos.some((a) => a.precio == null);
     $("#consulta-texto").textContent = `${elegidos.length} ${elegidos.length === 1 ? "repuesto elegido" : "repuestos elegidos"}` + (suma ? ` · $ ${nf.format(suma)}${sinPrecio ? " + a consultar" : ""}` : "");
     $("#wa-sel").href = waLink("Hola! Quiero consultar por estos repuestos de la Oferta Chapa:\n" + elegidos.map((a) => "• " + linea(a)).join("\n") + "\n¿Me pasan precio por todo junto?");
+    $("#oferta-sel").hidden = !elegidos.some((a) => a.precio != null);
+    $("#oferta-sel").textContent = elegidos.length === 1 ? "Hacé tu oferta" : "Ofertar por todo";
   }
+
+  // --- Hacé tu oferta. El piso (70% del precio publicado) no se muestra en ningún lado: una oferta por debajo no
+  // se envía y sólo se avisa que es baja. Para varias piezas, el piso es el 70% de la suma.
+  const PISO = 0.70;
+  let oferta = null; // { items: [artículos], seleccion: bool }
+  const digitos = (s) => parseInt(String(s).replace(/\D/g, ""), 10) || 0;
+
+  function abrirOferta(items, seleccion) {
+    oferta = { items: items.filter((a) => a.precio != null), sinPrecio: items.filter((a) => a.precio == null), seleccion };
+    const una = !seleccion && oferta.items.length === 1 ? oferta.items[0] : null;
+    if (una) {
+      $("#oferta-que").innerHTML = `<div class="tag"><span>Art. ${esc(una.art)}</span><span>${stockTexto(una)}</span></div>
+        <p class="desc">${esc(una.descripcion)}</p>
+        <div class="of-pub">Ford ${esc(una.vehiculo)} · ${esc(una.anios)} · publicado a $ ${nf.format(una.precio)} con IVA</div>`;
+      $("#oferta-cant").innerHTML = Array.from({ length: Math.max(1, una.stock) }, (_, i) => `<option>${i + 1}</option>`).join("");
+      $("#oferta-cant-campo").hidden = una.stock <= 1;
+      $("#oferta-label").textContent = "Tu oferta por unidad (con IVA)";
+    } else {
+      const suma = oferta.items.reduce((s, a) => s + a.precio, 0);
+      $("#oferta-que").innerHTML = `<ul>${oferta.items.map((a) => `<li>Art. ${esc(a.art)} · ${esc(a.descripcion)}</li>`).join("")}</ul>
+        <div class="of-pub">${oferta.items.length} repuestos · publicados a $ ${nf.format(suma)} con IVA en total${oferta.sinPrecio.length ? ` (${oferta.sinPrecio.length} sin precio quedan afuera de la oferta)` : ""}</div>`;
+      $("#oferta-cant-campo").hidden = true;
+      $("#oferta-label").textContent = "Tu oferta por todo junto (con IVA)";
+    }
+    $("#oferta-monto").value = "";
+    $("#oferta-aviso").textContent = "";
+    if ($("#zoom").open) $("#zoom").close();
+    $("#oferta").showModal();
+    $("#oferta-monto").focus();
+  }
+
+  $("#oferta-monto").addEventListener("input", (e) => {
+    const n = digitos(e.target.value);
+    e.target.value = n ? nf.format(n) : "";
+    $("#oferta-aviso").textContent = "";
+  });
+
+  $("#oferta-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const monto = digitos($("#oferta-monto").value);
+    if (!monto) { $("#oferta-aviso").textContent = "Escribí cuánto ofrecés."; $("#oferta-monto").focus(); return; }
+    const una = !oferta.seleccion && oferta.items.length === 1 ? oferta.items[0] : null;
+    const publicado = una ? una.precio : oferta.items.reduce((s, a) => s + a.precio, 0);
+    if (monto < Math.ceil(publicado * PISO)) {
+      $("#oferta-aviso").textContent = una ? "Tu oferta es muy baja para esta pieza. Probá con un monto mayor."
+        : "Tu oferta es muy baja para estos repuestos. Probá con un monto mayor.";
+      $("#oferta-monto").focus();
+      return;
+    }
+    let texto;
+    if (una) {
+      const cant = digitos($("#oferta-cant").value) || 1;
+      texto = "Hola! Quiero hacer una oferta por este repuesto de la Oferta Chapa:\n• " + linea(una)
+        + `\nOfrezco $ ${nf.format(monto)} por unidad` + (cant > 1 ? ` (${cant} unidades: $ ${nf.format(monto * cant)} en total).` : ".");
+    } else {
+      texto = "Hola! Quiero hacer una oferta por estos repuestos de la Oferta Chapa:\n"
+        + oferta.items.map((a) => "• " + linea(a)).join("\n")
+        + `\nTotal publicado: $ ${nf.format(publicado)}\nOfrezco $ ${nf.format(monto)} por todo junto.`;
+    }
+    window.open(waLink(texto), "_blank", "noopener");
+    $("#oferta").close();
+  });
+  $("#oferta-cancelar").addEventListener("click", () => $("#oferta").close());
+  $("#oferta").addEventListener("click", (e) => { if (e.target.id === "oferta") $("#oferta").close(); });
+  $("#oferta-sel").addEventListener("click", () => {
+    const elegidos = DATA.articulos.filter((a) => sel.has(a.art));
+    abrirOferta(elegidos, elegidos.length > 1);
+  });
 
   function setup() {
     $("#vehiculos").innerHTML = VEHICULOS.filter((v) => v === "Todos" || DATA.articulos.some((a) => vehMatch(a, v)))
@@ -283,8 +394,13 @@ dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
         <p class="desc">${esc(a.descripcion)}</p>
         <div class="veh"><strong>Ford ${esc(a.vehiculo)}</strong> · ${esc(a.anios)}${a.posicion ? " · " + esc(a.posicion) : ""}</div>
         <div class="price${a.precio == null ? " ask" : ""}">${precio(a)}${a.precio == null ? "" : "<small>con IVA</small>"}</div>
-        <div class="acciones"><a class="btn wa" href="${waLink("Hola! Me interesa este repuesto de la Oferta Chapa: " + linea(a))}" target="_blank" rel="noopener">Consultar por WhatsApp</a><button class="btn" type="button" id="cerrar">Cerrar</button></div>`;
+        <div class="acciones">${a.precio == null ? "" : `<button class="btn oferta" type="button" data-oferta="${esc(a.art)}">Hacé tu oferta</button>`}<a class="btn wa" href="${waLink("Hola! Me interesa este repuesto de la Oferta Chapa: " + linea(a))}" target="_blank" rel="noopener">Consultar por WhatsApp</a><button class="btn" type="button" id="cerrar">Cerrar</button></div>`;
       $("#zoom").showModal(); return;
+    }
+    const ofertar = e.target.closest("[data-oferta]");
+    if (ofertar) {
+      abrirOferta([DATA.articulos.find((x) => x.art === ofertar.dataset.oferta)], false);
+      return;
     }
     if (e.target.id === "cerrar" || e.target.id === "zoom") $("#zoom").close();
   });
