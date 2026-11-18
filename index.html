@@ -297,9 +297,10 @@ dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
     $("#oferta-sel").textContent = elegidos.length === 1 ? "Hacé tu oferta" : "Ofertar por todo";
   }
 
-  // --- Hacé tu oferta. El piso (70% del precio publicado) no se muestra en ningún lado: una oferta por debajo no
-  // se envía y sólo se avisa que es baja. Para varias piezas, el piso es el 70% de la suma.
-  const PISO = 0.70;
+  // --- Hacé tu oferta. El piso (fracción del precio publicado) no se muestra en ningún lado: una oferta por debajo
+  // no se envía y sólo se avisa que es baja. Para varias piezas, el piso es esa fracción de la suma.
+  // 18/11/2026: en 0 a pedido del usuario, por ahora (antes 0.70). Con 0 pasa cualquier oferta mayor que cero.
+  const PISO = 0;
   let oferta = null; // { items: [artículos], seleccion: bool }
   const digitos = (s) => parseInt(String(s).replace(/\D/g, ""), 10) || 0;
 
