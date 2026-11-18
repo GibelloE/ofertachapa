@@ -152,7 +152,7 @@ dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
 </div>
 <header class="wrap top">
   <h1>Oferta chapa <span>·</span> Falcon, Taunus y F100</h1>
-  <p class="lead" id="lead">Liquidamos repuestos de chapa y carrocería discontinuados: paneles de puerta, guardabarros, paragolpes, tapizados, parrillas y más. Son las últimas unidades que nos quedan. <strong>Hacé tu oferta</strong> por la pieza que te interese: revisamos todas y te contestamos por WhatsApp.</p>
+  <p class="lead" id="lead">Liquidamos repuestos de chapa y carrocería discontinuados: paragolpes, capots, tapizados de puerta, guardabarros, ópticas, parrillas y más. Son las últimas unidades que nos quedan. <strong>Hacé tu oferta</strong> por la pieza que te interese: revisamos todas y te contestamos por WhatsApp.</p>
   <div class="lote">
     <p><strong>¿Buscás varias piezas o el lote completo?</strong> Marcá las que te interesan y hacé una oferta por todo junto, o mandanos la consulta por WhatsApp.</p>
     <a class="btn wa" id="wa-lote" href="https://wa.me/542214084894" target="_blank" rel="noopener">Consultar por el lote</a>
@@ -223,6 +223,12 @@ dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
   const nf = new Intl.NumberFormat("es-AR", { maximumFractionDigits: 0 });
   const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const VEHICULOS = ["Todos", "Falcon", "Taunus", "F100", "Ranchero"];
+  // Orden de las categorías en la página, de lo más buscado a lo más específico (pedido del usuario, 18/11/2026:
+  // paragolpes, capots, tapizados, guardabarros, ópticas "y así"; los cajones de puerta, al final). Una categoría
+  // nueva que no esté en la lista va al final.
+  const ORDEN_CATEGORIAS = ["Paragolpes", "Capots y tapas de baúl", "Tapizados de puerta", "Guardabarros delanteros",
+    "Guardabarros traseros", "Ópticas y faros", "Parrillas", "Paneles de puerta", "Molduras de puerta y guardabarro",
+    "Accesorios de paragolpe", "Reparaciones de guardabarro", "Chapa estructural", "Puertas (cajón de chapa)"];
   const state = { vehiculo: "Todos", categoria: "", q: "", orden: "categoria" };
   let DATA = null;
   let sel = new Set();
@@ -415,7 +421,8 @@ dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
     .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then((d) => {
       DATA = d;
-      DATA.categorias = [...new Set(d.articulos.map((a) => a.categoria))];
+      const rango = (c) => { const i = ORDEN_CATEGORIAS.indexOf(c); return i < 0 ? ORDEN_CATEGORIAS.length : i; };
+      DATA.categorias = [...new Set(d.articulos.map((a) => a.categoria))].sort((x, y) => rango(x) - rango(y));
       const vigentes = new Set(d.articulos.map((a) => a.art));
       sel = new Set([...sel].filter((x) => vigentes.has(x)));
       setup(); render(); consulta();
