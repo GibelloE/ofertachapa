@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-dKImct/obi2/mKjyvziL4pmd7oIq5Uw8b+qkT1+2jH0='; style-src 'sha256-JFlCRK0X3SiiDShc0IrAsF0WeGQXvhTP2fgb15RaaqY='; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Oferta chapa Ford | Gibello Repuestos Ford</title>
+<meta name="description" content="Liquidación de repuestos de chapa y carrocería para Ford Falcon, Taunus, F100, Ranger, Fiesta, Focus, EcoSport, Ka, Escort, Sierra, Galaxy, Transit y Mondeo. Precios con IVA.">
+<meta property="og:title" content="Oferta chapa Ford">
+<meta property="og:description" content="Repuestos de chapa y carrocería Ford en liquidación, con stock.">
+<meta property="og:type" content="website">
+<style>
+/* Catálogo de liquidación: cabecera con la propuesta, filtros fijos, grilla de piezas por categoría; las piezas se
+   eligen y se consultan juntas por WhatsApp. */
+@font-face { font-family: "Barlow Condensed"; font-weight: 500; font-style: normal; font-display: swap; src: url("fuentes/barlow-condensed-500.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-weight: 600; font-style: normal; font-display: swap; src: url("fuentes/barlow-condensed-600.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-weight: 700; font-style: normal; font-display: swap; src: url("fuentes/barlow-condensed-700.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 400 600; font-style: normal; font-display: swap; src: url("fuentes/inter.woff2") format("woff2"); }
+:root {
+  --bg: #eef0f1;
+  --surface: #ffffff;
+  --photo: #ffffff;
+  --ink: #15191d;
+  --muted: #59626b;
+  --line: #d3d8dc;
+  --accent: #a3412a;
+  --accent-soft: #f4e2dc;
+  --on-accent: #ffffff;
+  --wa: #1f8f4e;
+  --on-wa: #ffffff;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r: 6px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111416; --surface: #1a1e21; --photo: #f4f5f6; --ink: #e8ebee; --muted: #9aa3ab; --line: #2d3338;
+    --accent: #e27a5f; --accent-soft: #3a2420; --on-accent: #1a0e0a; --wa: #2fb36a; --on-wa: #06200f;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 var(--font-body); }
+a { color: inherit; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+.wrap {
+  max-width: 1240px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.marca { padding-block: 14px 0; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.marca a { text-decoration: none; font-weight: 600; color: var(--ink); }
+.marca a:hover { text-decoration: underline; }
+header.top { padding-block: 18px 22px; display: grid; gap: 12px; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 6vw, 54px); line-height: .95; margin: 0; text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; }
+h1 span { color: var(--accent); }
+.lead { margin: 0; color: var(--muted); max-width: 64ch; }
+.lote { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); max-width: 760px; }
+.lote p { margin: 0; flex: 1 1 280px; min-width: 0; }
+.btn {
+  font: inherit; font-weight: 600; cursor: pointer; border-radius: var(--r); border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); padding: 8px 14px; min-height: 38px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; justify-content: center;
+}
+.btn.wa { background: var(--wa); border-color: var(--wa); color: var(--on-wa); }
+.btn.small { padding: 6px 10px; min-height: 32px; font-size: 13px; }
+:is(.btn, .chip, select, input, .ph):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); padding-block: 10px; }
+.bar .wrap { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip, select, input[type="search"] { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; min-height: 36px; }
+.chip { cursor: pointer; font-weight: 500; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+select { border-radius: var(--r); max-width: 100%; }
+input[type="search"] { border-radius: var(--r); flex: 1 1 200px; min-width: 0; }
+#vehiculo { display: none; }
+@media (max-width: 820px) { .chips { display: none; } #vehiculo { display: block; flex: 1 1 140px; min-width: 0; } #categoria { flex: 1 1 140px; min-width: 0; } }
+.shown { padding-block: 12px 0; color: var(--muted); font-size: 13px; }
+
+main { padding-block: 0 110px; }
+section.group { display: grid; gap: 12px; padding-block: 18px 4px; }
+.group h2 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 24px; text-transform: uppercase; letter-spacing: .02em; border-bottom: 2px solid var(--ink); padding-bottom: 4px; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.group h2 small { font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--muted); text-transform: none; letter-spacing: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; min-width: 0; }
+.card.sel { border-color: var(--wa); box-shadow: 0 0 0 1px var(--wa); }
+/* la foto va en una caja 4:3 fija: posicionada en absoluto, una foto cuadrada o alta no puede agrandar la tarjeta */
+.ph { all: unset; cursor: zoom-in; position: relative; display: block; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; background: var(--photo); border-bottom: 1px solid var(--line); }
+.ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+.none.grande { padding: 60px; }
+.ph .none { position: absolute; inset: 0; display: grid; place-items: center; font-size: 12px; color: #8a9097; }
+.body { padding: 10px 12px 12px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.tag { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.desc { font-family: var(--font-display); font-weight: 600; font-size: 17px; line-height: 1.15; overflow-wrap: anywhere; margin: 0; }
+.veh { font-size: 13px; }
+.veh strong { font-weight: 600; }
+.pill { justify-self: start; font-size: 11px; padding: 2px 7px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.price { font-family: var(--font-display); font-size: 25px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.price small { font-family: var(--font-body); font-size: 11px; font-weight: 500; color: var(--muted); margin-left: 4px; }
+.price.ask { font-size: 19px; color: var(--accent); }
+.acciones { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
+.acciones .btn { flex: 1 1 auto; }
+.btn.oferta { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+.acciones .btn.oferta { flex-basis: 100%; }
+.consulta .btn.oferta { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+/* Hacé tu oferta: el piso no se muestra; debajo de él la oferta no sale */
+#oferta { width: min(480px, calc(100vw - 24px)); }
+#oferta form { padding: 16px; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+#oferta form > * { min-width: 0; }
+.of-que .desc, .of-que li, .of-pub { overflow-wrap: anywhere; }
+#oferta h2 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 26px; text-transform: uppercase; }
+.of-que { display: grid; gap: 4px; padding: 10px 12px; background: var(--bg); border-radius: var(--r); }
+.of-que ul { margin: 0; padding-left: 18px; display: grid; gap: 2px; font-size: 13px; }
+.of-que .desc { font-size: 16px; }
+.of-pub { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.campo { display: grid; gap: 4px; font-weight: 600; font-size: 14px; }
+.campo select { justify-self: start; }
+.monto { display: flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); padding: 0 12px; }
+.monto span { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--muted); }
+.monto input { all: unset; flex: 1; min-width: 0; width: 100%; font-family: var(--font-display); font-size: 26px; font-weight: 700; padding: 8px 0; font-variant-numeric: tabular-nums; }
+.monto:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.aviso { margin: 0; color: var(--accent); font-weight: 600; min-height: 1.45em; }
+.nota { margin: 0; font-size: 13px; color: var(--muted); }
+.empty { padding: 40px 0; color: var(--muted); text-align: center; }
+
+.consulta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 8; background: var(--ink); color: var(--bg); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.consulta .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-block: 10px; }
+.consulta p { margin: 0; flex: 1 1 200px; min-width: 0; font-weight: 500; }
+.consulta .btn.vaciar { background: transparent; color: var(--bg); border-color: var(--muted); }
+
+footer { color: var(--muted); font-size: 13px; padding-block: 24px 32px; border-top: 1px solid var(--line); }
+footer .wrap { display: grid; gap: 6px; }
+footer p { margin: 0; }
+.enlace { all: unset; cursor: pointer; text-decoration: underline; color: inherit; }
+.enlace:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#freno { width: min(420px, calc(100vw - 32px)); }
+#freno p { margin: 0 0 6px; }
+
+dialog { border: 1px solid var(--line); border-radius: var(--r); padding: 0; background: var(--surface); color: var(--ink); width: min(760px, calc(100vw - 32px)); }
+dialog::backdrop { background: rgb(0 0 0 / .6); }
+dialog .big { background: var(--photo); display: grid; place-items: center; }
+dialog .big img { max-height: 70vh; width: auto; max-width: 100%; object-fit: contain; }
+dialog .info { padding: 12px 16px 16px; display: grid; gap: 6px; }
+@media (max-width: 520px) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 8px; }
+  .desc { font-size: 15px; }
+  .price { font-size: 21px; }
+  .acciones .btn { font-size: 12px; padding: 6px 8px; }
+}
+@media (prefers-reduced-motion: no-preference) { .card { transition: border-color .15s; } }
+</style>
+</head>
+<body>
+<div class="wrap marca">
+  <a href="https://www.gibelloford.com.ar/">← Gibello Repuestos Ford</a>
+  <span>Precios con IVA · Stock limitado</span>
+</div>
+<header class="wrap top">
+  <h1>Oferta chapa <span>·</span> Ford</h1>
+  <p class="lead" id="lead">Liquidamos repuestos de chapa y carrocería para Falcon, Taunus, F100, Ranger, Fiesta, Focus, EcoSport y más modelos: paragolpes, capots, tapizados de puerta, guardabarros, puertas y más. Son las últimas unidades que nos quedan. <strong>Hacé tu oferta</strong> por la pieza que te interese: revisamos todas y te contestamos por WhatsApp.</p>
+  <div class="lote">
+    <p><strong>¿Buscás varias piezas o el lote completo?</strong> Marcá las que te interesan y hacé una oferta por todo junto, o mandanos la consulta por WhatsApp.</p>
+    <button class="btn wa" type="button" data-wa="lote">Consultar por el lote</button>
+  </div>
+</header>
+
+<div class="bar" role="region" aria-label="Filtros">
+  <div class="wrap">
+    <div class="chips" id="vehiculos" role="group" aria-label="Vehículo"></div>
+    <select id="vehiculo" aria-label="Vehículo"></select>
+    <select id="categoria" aria-label="Tipo de pieza"><option value="">Todas las piezas</option></select>
+    <input type="search" id="buscar" placeholder="Buscar pieza o número de artículo" aria-label="Buscar">
+    <select id="orden" aria-label="Ordenar">
+      <option value="categoria">Por tipo de pieza</option>
+      <option value="vehiculo">Por vehículo y año</option>
+      <option value="menor">Precio: menor a mayor</option>
+      <option value="mayor">Precio: mayor a menor</option>
+    </select>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="shown" id="shown" aria-live="polite"></div>
+  <main id="main"><div class="empty">Cargando repuestos…</div></main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Gibello Repuestos Ford</strong> · <button class="enlace" type="button" data-wa="general">Escribinos por WhatsApp</button> · <a href="https://www.instagram.com/gibelloford" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/gibelloford" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.gibelloford.com.ar/">Tienda online</a></p>
+    <p id="pie">Precios con IVA incluido, sujetos a disponibilidad de stock.</p>
+  </div>
+</footer>
+
+<div class="consulta" id="consulta" hidden>
+  <div class="wrap">
+    <p id="consulta-texto"></p>
+    <button class="btn vaciar small" id="vaciar" type="button">Vaciar</button>
+    <button class="btn oferta" id="oferta-sel" type="button">Ofertar por todo</button>
+    <button class="btn wa" type="button" data-wa="sel">Consultar por WhatsApp</button>
+  </div>
+</div>
+
+<dialog id="zoom" aria-label="Detalle del repuesto">
+  <div class="big" id="zoom-img"></div>
+  <div class="info" id="zoom-info"></div>
+</dialog>
+
+<dialog id="freno" aria-labelledby="freno-texto">
+  <div class="info"><p id="freno-texto"></p><button class="btn" type="button" id="freno-cerrar">Entendido</button></div>
+</dialog>
+
+<dialog id="oferta" aria-labelledby="oferta-titulo">
+  <form id="oferta-form" novalidate>
+    <h2 id="oferta-titulo">Hacé tu oferta</h2>
+    <div class="of-que" id="oferta-que"></div>
+    <label class="campo" id="oferta-cant-campo">Cantidad <select id="oferta-cant"></select></label>
+    <label class="campo"><span id="oferta-label">Tu oferta (con IVA)</span>
+      <span class="monto"><span>$</span><input id="oferta-monto" inputmode="numeric" autocomplete="off" placeholder="0" aria-describedby="oferta-aviso"></span>
+    </label>
+    <p class="aviso" id="oferta-aviso" role="alert"></p>
+    <p class="nota">Revisamos cada oferta y te respondemos por WhatsApp.</p>
+    <div class="acciones">
+      <button class="btn wa" type="submit">Enviar oferta por WhatsApp</button>
+      <button class="btn" type="button" id="oferta-cancelar">Cancelar</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const nf = new Intl.NumberFormat("es-AR", { maximumFractionDigits: 0 });
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  // En PC son botones; en el celular, una lista (con tantos modelos, los botones tapaban media pantalla).
+  const VEHICULOS = ["Todos", "Falcon", "Taunus", "F100", "Ranchero", "Ranger", "Fiesta", "Focus", "EcoSport", "Ka", "Escort",
+    "Orion", "Sierra", "Galaxy", "Transit", "Mondeo", "Courier", "Kuga", "S-Max"];
+  // Orden de las categorías, de lo más buscado a lo más específico. Una nueva que no esté en la lista va al final.
+  const ORDEN_CATEGORIAS = ["Paragolpes", "Capots y tapas de baúl", "Tapizados de puerta", "Guardabarros delanteros",
+    "Guardabarros traseros", "Ópticas y faros", "Parrillas", "Puertas", "Laterales", "Paneles de puerta",
+    "Tapizados de baúl y bandejas", "Molduras de puerta y guardabarro", "Accesorios de paragolpe",
+    "Reparaciones de guardabarro", "Chapa estructural", "Cardanes", "Puertas (cajón de chapa)"];
+  const state = { vehiculo: "Todos", categoria: "", q: "", orden: "categoria" };
+  let DATA = null;
+  let sel = new Set();
+  try { sel = new Set(JSON.parse(localStorage.getItem("ofertachapa.sel") || "[]")); } catch (e) {}
+  const guardar = () => { try { localStorage.setItem("ofertachapa.sel", JSON.stringify([...sel])); } catch (e) {} };
+
+  const precio = (a) => a.precio == null ? "Consultar precio" : `$ ${nf.format(a.precio)}`;
+  const stockTexto = (a) => a.stock === 1 ? "Última unidad" : `${a.stock} unidades`;
+  const linea = (a) => `Art. ${a.art} · ${a.descripcion} · ${a.precio == null ? "consultar precio" : "$ " + nf.format(a.precio)}`;
+  const vehTexto = (a) => `Ford ${a.vehiculo}${a.anios ? " · " + a.anios : ""}`;
+  const vehMatch = (a, v) => v === "Todos" || (a.vehiculo || "").includes(v);
+
+  function filtrados() {
+    const q = state.q.trim().toUpperCase();
+    return DATA.articulos.filter((a) => vehMatch(a, state.vehiculo) && (!state.categoria || a.categoria === state.categoria)
+      && (!q || a.descripcion.toUpperCase().includes(q) || a.art.includes(q)));
+  }
+  function ordenar(lista) {
+    const cats = DATA.categorias, sinPrecio = (x) => x.precio == null;
+    const by = {
+      categoria: (x, y) => cats.indexOf(x.categoria) - cats.indexOf(y.categoria) || x.vehiculo.localeCompare(y.vehiculo) || (x.desde || 0) - (y.desde || 0),
+      vehiculo: (x, y) => x.vehiculo.localeCompare(y.vehiculo) || (x.desde || 0) - (y.desde || 0) || x.descripcion.localeCompare(y.descripcion),
+      menor: (x, y) => sinPrecio(x) - sinPrecio(y) || (x.precio || 0) - (y.precio || 0),
+      mayor: (x, y) => sinPrecio(x) - sinPrecio(y) || (y.precio || 0) - (x.precio || 0),
+    }[state.orden];
+    return lista.slice().sort(by);
+  }
+  const foto = (a) => a.foto ? `<img src="${esc(a.foto)}" alt="${esc(a.descripcion)}" loading="lazy" decoding="async">` : `<span class="none">Sin foto</span>`;
+
+  function card(a) {
+    const elegido = sel.has(a.art);
+    return `<article class="card${elegido ? " sel" : ""}">
+      <button class="ph" type="button" data-art="${esc(a.art)}" aria-label="Ver foto de ${esc(a.descripcion)}">${foto(a)}</button>
+      <div class="body">
+        <div class="tag"><span>Art. ${esc(a.art)}</span><span>${stockTexto(a)}</span></div>
+        <p class="desc">${esc(a.descripcion)}</p>
+        <div class="veh"><strong>Ford ${esc(a.vehiculo)}</strong>${a.anios ? " · " + esc(a.anios) : ""}</div>
+        ${a.posicion ? `<span class="pill">${esc(a.posicion)}</span>` : ""}
+        <div class="price${a.precio == null ? " ask" : ""}">${precio(a)}${a.precio == null ? "" : "<small>con IVA</small>"}</div>
+        <div class="acciones">
+          <button class="btn small" type="button" data-sel="${esc(a.art)}" aria-pressed="${elegido}">${elegido ? "✓ Elegida" : "+ Elegir"}</button>
+          <button class="btn wa small" type="button" data-wa="pieza" data-art="${esc(a.art)}">Consultar</button>
+          ${a.precio == null ? "" : `<button class="btn small oferta" type="button" data-oferta="${esc(a.art)}">Hacé tu oferta</button>`}
+        </div>
+      </div>
+    </article>`;
+  }
+
+  function render() {
+    const lista = ordenar(filtrados());
+    const total = DATA.articulos.length;
+    $("#shown").textContent = lista.length === total ? `${total} repuestos en oferta` : `${lista.length} de ${total} repuestos`;
+    if (!lista.length) { $("#main").innerHTML = `<div class="empty">No encontramos repuestos con esos filtros.</div>`; return; }
+    if (state.orden === "categoria") {
+      $("#main").innerHTML = DATA.categorias.map((c) => {
+        const g = lista.filter((a) => a.categoria === c);
+        return g.length ? `<section class="group"><h2>${esc(c)}<small>${g.length} ${g.length === 1 ? "repuesto" : "repuestos"}</small></h2><div class="grid">${g.map(card).join("")}</div></section>` : "";
+      }).join("");
+    } else {
+      $("#main").innerHTML = `<section class="group"><div class="grid">${lista.map(card).join("")}</div></section>`;
+    }
+  }
+
+  function consulta() {
+    const elegidos = DATA.articulos.filter((a) => sel.has(a.art));
+    $("#consulta").hidden = !elegidos.length;
+    if (!elegidos.length) return;
+    const suma = elegidos.reduce((s, a) => s + (a.precio || 0), 0), sinPrecio = elegidos.some((a) => a.precio == null);
+    $("#consulta-texto").textContent = `${elegidos.length} ${elegidos.length === 1 ? "repuesto elegido" : "repuestos elegidos"}` + (suma ? ` · $ ${nf.format(suma)}${sinPrecio ? " + a consultar" : ""}` : "");
+    $("#oferta-sel").hidden = !elegidos.some((a) => a.precio != null);
+    $("#oferta-sel").textContent = elegidos.length === 1 ? "Hacé tu oferta" : "Ofertar por todo";
+  }
+
+  // --- WhatsApp: todos los botones pasan por abrirWhatsApp. El número no está escrito en el HTML ni en los enlaces; se
+  // arma cuando una persona toca el botón. Los topes son por navegador.
+  const CLAVE = "498480412245";
+  const MIN = 60e3, DIA = 24 * 60 * MIN;
+  const TOPE = { seguidas: 6, ventana: 10 * MIN, porDia: 25, iguales: 2, ofertasPorPieza: 3, piezas: 30 };
+  const cargada = Date.now();
+  let memoria = [];
+  const marca = (s) => { let h = 5381; for (const ch of s) h = (h * 33 + ch.codePointAt(0)) >>> 0; return h.toString(36); };
+
+  function historial() {
+    let h = memoria;
+    try { const g = JSON.parse(localStorage.getItem("ofertachapa.wa") || "[]"); if (Array.isArray(g) && g.length) h = g; } catch (e) {}
+    const ahora = Date.now();
+    return h.filter((x) => x && typeof x.t === "number" && x.t <= ahora && ahora - x.t < DIA);
+  }
+  function anotar(registro) {
+    memoria = [...historial(), registro].slice(-200);
+    try { localStorage.setItem("ofertachapa.wa", JSON.stringify(memoria)); } catch (e) {}
+  }
+
+  // Devuelve el motivo para no abrir WhatsApp, o "" si está todo bien.
+  function motivo(texto, piezas, ofertada) {
+    const h = historial(), ahora = Date.now();
+    const hace = (ms, f = () => true) => h.filter((x) => ahora - x.t < ms && f(x));
+    if (piezas > TOPE.piezas) return `Elegiste ${piezas} piezas y entran hasta ${TOPE.piezas} por mensaje. Sacá algunas o usá «Consultar por el lote».`;
+    if (hace(DIA).length >= TOPE.porDia) return "Llegaste al máximo de consultas por hoy. Te respondemos las que ya mandaste.";
+    if (ofertada && hace(DIA, (x) => x.o === ofertada).length >= TOPE.ofertasPorPieza) return "Ya hiciste varias ofertas por esto hoy. Te respondemos por WhatsApp.";
+    if (hace(TOPE.ventana, (x) => x.k === marca(texto)).length >= TOPE.iguales) return "Ya abriste esta misma consulta. Si no se envió, probá de nuevo en unos minutos.";
+    const seguidas = hace(TOPE.ventana);
+    if (seguidas.length >= TOPE.seguidas) {
+      const faltan = Math.max(1, Math.ceil((TOPE.ventana - (ahora - seguidas[seguidas.length - TOPE.seguidas].t)) / MIN));
+      return `Abriste varias consultas seguidas. Marcá las piezas con «+ Elegir» y mandalas juntas, o probá en ${faltan} ${faltan === 1 ? "minuto" : "minutos"}.`;
+    }
+    return "";
+  }
+
+  // evento: el clic real. Los clics hechos por un programa, o con la página metida dentro de otra, no abren nada.
+  function abrirWhatsApp(evento, texto, piezas = 1, ofertada = "") {
+    if (!evento.isTrusted || navigator.webdriver || window.top !== window.self || Date.now() - cargada < 1500) return "";
+    const freno = motivo(texto, piezas, ofertada);
+    if (freno) return freno;
+    anotar({ t: Date.now(), k: marca(texto), ...(ofertada ? { o: ofertada } : {}) });
+    const enlace = document.createElement("a"); // enlace común: anda también en los navegadores de Instagram y Facebook
+    enlace.href = `https://wa.me/${[...CLAVE].reverse().join("")}?text=${encodeURIComponent(texto)}`;
+    enlace.target = "_blank";
+    enlace.rel = "noopener noreferrer";
+    document.body.append(enlace);
+    enlace.click();
+    enlace.remove();
+    return "";
+  }
+  function frenar(texto) {
+    if (!texto) return;
+    $("#freno-texto").textContent = texto;
+    $("#freno").showModal();
+  }
+  $("#freno-cerrar").addEventListener("click", () => $("#freno").close());
+
+  const TEXTOS = {
+    lote: "Hola! Vi la Oferta Chapa y me interesa comprar varias piezas o el lote. ¿Cómo hacemos?",
+    general: "Hola! Vi la Oferta Chapa y quiero hacer una consulta.",
+  };
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-wa]");
+    if (!b) return;
+    const tipo = b.dataset.wa;
+    if (TEXTOS[tipo]) { frenar(abrirWhatsApp(e, TEXTOS[tipo])); return; }
+    if (!DATA) return;
+    if (tipo === "pieza") {
+      const a = DATA.articulos.find((x) => x.art === b.dataset.art);
+      if (a) frenar(abrirWhatsApp(e, "Hola! Me interesa este repuesto de la Oferta Chapa: " + linea(a)));
+    } else if (tipo === "sel") {
+      const elegidos = DATA.articulos.filter((a) => sel.has(a.art));
+      if (elegidos.length) frenar(abrirWhatsApp(e, "Hola! Quiero consultar por estos repuestos de la Oferta Chapa:\n"
+        + elegidos.map((a) => "• " + linea(a)).join("\n") + "\n¿Me pasan precio por todo junto?", elegidos.length));
+    }
+  });
+
+  // --- Hacé tu oferta
+  const PISO = 0;
+  let oferta = null; // { items: [artículos], seleccion: bool }
+  const digitos = (s) => parseInt(String(s).replace(/\D/g, "").slice(0, 9), 10) || 0;
+
+  function abrirOferta(items, seleccion) {
+    oferta = { items: items.filter((a) => a.precio != null), sinPrecio: items.filter((a) => a.precio == null), seleccion };
+    const una = !seleccion && oferta.items.length === 1 ? oferta.items[0] : null;
+    if (una) {
+      $("#oferta-que").innerHTML = `<div class="tag"><span>Art. ${esc(una.art)}</span><span>${stockTexto(una)}</span></div>
+        <p class="desc">${esc(una.descripcion)}</p>
+        <div class="of-pub">${esc(vehTexto(una))} · publicado a $ ${nf.format(una.precio)} con IVA</div>`;
+      $("#oferta-cant").innerHTML = Array.from({ length: Math.max(1, una.stock) }, (_, i) => `<option>${i + 1}</option>`).join("");
+      $("#oferta-cant-campo").hidden = una.stock <= 1;
+      $("#oferta-label").textContent = "Tu oferta por unidad (con IVA)";
+    } else {
+      const suma = oferta.items.reduce((s, a) => s + a.precio, 0);
+      $("#oferta-que").innerHTML = `<ul>${oferta.items.map((a) => `<li>Art. ${esc(a.art)} · ${esc(a.descripcion)}</li>`).join("")}</ul>
+        <div class="of-pub">${oferta.items.length} repuestos · publicados a $ ${nf.format(suma)} con IVA en total${oferta.sinPrecio.length ? ` (${oferta.sinPrecio.length} sin precio quedan afuera de la oferta)` : ""}</div>`;
+      $("#oferta-cant-campo").hidden = true;
+      $("#oferta-label").textContent = "Tu oferta por todo junto (con IVA)";
+    }
+    $("#oferta-monto").value = "";
+    $("#oferta-aviso").textContent = "";
+    if ($("#zoom").open) $("#zoom").close();
+    $("#oferta").showModal();
+    $("#oferta-monto").focus();
+  }
+
+  $("#oferta-monto").addEventListener("input", (e) => {
+    const n = digitos(e.target.value);
+    e.target.value = n ? nf.format(n) : "";
+    $("#oferta-aviso").textContent = "";
+  });
+
+  $("#oferta-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const monto = digitos($("#oferta-monto").value);
+    if (!monto) { $("#oferta-aviso").textContent = "Escribí cuánto ofrecés."; $("#oferta-monto").focus(); return; }
+    const una = !oferta.seleccion && oferta.items.length === 1 ? oferta.items[0] : null;
+    const publicado = una ? una.precio : oferta.items.reduce((s, a) => s + a.precio, 0);
+    if (monto < Math.ceil(publicado * PISO)) {
+      $("#oferta-aviso").textContent = una ? "Tu oferta es muy baja para esta pieza. Probá con un monto mayor."
+        : "Tu oferta es muy baja para estos repuestos. Probá con un monto mayor.";
+      $("#oferta-monto").focus();
+      return;
+    }
+    if (monto > publicado) {
+      $("#oferta-aviso").textContent = "Tu oferta supera el precio publicado. Revisá el monto.";
+      $("#oferta-monto").focus();
+      return;
+    }
+    let texto;
+    if (una) {
+      const cant = digitos($("#oferta-cant").value) || 1;
+      texto = "Hola! Quiero hacer una oferta por este repuesto de la Oferta Chapa:\n• " + linea(una)
+        + `\nOfrezco $ ${nf.format(monto)} por unidad` + (cant > 1 ? ` (${cant} unidades: $ ${nf.format(monto * cant)} en total).` : ".");
+    } else {
+      texto = "Hola! Quiero hacer una oferta por estos repuestos de la Oferta Chapa:\n"
+        + oferta.items.map((a) => "• " + linea(a)).join("\n")
+        + `\nTotal publicado: $ ${nf.format(publicado)}\nOfrezco $ ${nf.format(monto)} por todo junto.`;
+    }
+    const freno = abrirWhatsApp(e, texto, oferta.items.length, una ? una.art : marca(oferta.items.map((a) => a.art).join()));
+    if (freno) { $("#oferta-aviso").textContent = freno; return; }
+    $("#oferta").close();
+  });
+  $("#oferta-cancelar").addEventListener("click", () => $("#oferta").close());
+  $("#oferta").addEventListener("click", (e) => { if (e.target.id === "oferta") $("#oferta").close(); });
+  $("#oferta-sel").addEventListener("click", () => {
+    const elegidos = DATA.articulos.filter((a) => sel.has(a.art));
+    abrirOferta(elegidos, elegidos.length > 1);
+  });
+
+  function setup() {
+    const vehiculos = VEHICULOS.filter((v) => v === "Todos" || DATA.articulos.some((a) => vehMatch(a, v)));
+    $("#vehiculos").innerHTML = vehiculos
+      .map((v) => `<button class="chip" type="button" data-v="${v}" aria-pressed="${v === state.vehiculo}">${v}</button>`).join("");
+    $("#vehiculo").innerHTML = vehiculos.map((v) => `<option value="${v}">${v === "Todos" ? "Todos los Ford" : v}</option>`).join("");
+    $("#categoria").innerHTML += DATA.categorias.map((c) => `<option>${esc(c)}</option>`).join("");
+    const d = DATA.actualizado;
+    $("#pie").textContent = `Precios con IVA incluido, sujetos a disponibilidad de stock. Actualizado el ${d.slice(8, 10)}/${d.slice(5, 7)}/${d.slice(0, 4)}.`;
+  }
+
+  function elegirVehiculo(v) {
+    state.vehiculo = v;
+    $("#vehiculo").value = v;
+    document.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.v === v)));
+    render();
+  }
+  $("#vehiculo").addEventListener("change", (e) => elegirVehiculo(e.target.value));
+
+  document.addEventListener("click", (e) => {
+    const chip = e.target.closest(".chip");
+    if (chip) { elegirVehiculo(chip.dataset.v); return; }
+    const elegir = e.target.closest("[data-sel]");
+    if (elegir) {
+      const art = elegir.dataset.sel;
+      sel.has(art) ? sel.delete(art) : sel.add(art);
+      guardar(); render(); consulta(); return;
+    }
+    const ph = e.target.closest("button.ph");
+    if (ph) {
+      const a = DATA.articulos.find((x) => x.art === ph.dataset.art);
+      $("#zoom-img").innerHTML = a.foto ? `<img src="${esc(a.foto)}" alt="${esc(a.descripcion)}">` : `<span class="none grande">Sin foto</span>`;
+      $("#zoom-info").innerHTML = `<div class="tag"><span>Art. ${esc(a.art)} · ${esc(a.categoria)}</span><span>${stockTexto(a)}</span></div>
+        <p class="desc">${esc(a.descripcion)}</p>
+        <div class="veh"><strong>Ford ${esc(a.vehiculo)}</strong>${a.anios ? " · " + esc(a.anios) : ""}${a.posicion ? " · " + esc(a.posicion) : ""}</div>
+        <div class="price${a.precio == null ? " ask" : ""}">${precio(a)}${a.precio == null ? "" : "<small>con IVA</small>"}</div>
+        <div class="acciones">${a.precio == null ? "" : `<button class="btn oferta" type="button" data-oferta="${esc(a.art)}">Hacé tu oferta</button>`}<button class="btn wa" type="button" data-wa="pieza" data-art="${esc(a.art)}">Consultar por WhatsApp</button><button class="btn" type="button" id="cerrar">Cerrar</button></div>`;
+      $("#zoom").showModal(); return;
+    }
+    const ofertar = e.target.closest("[data-oferta]");
+    if (ofertar) {
+      abrirOferta([DATA.articulos.find((x) => x.art === ofertar.dataset.oferta)], false);
+      return;
+    }
+    if (e.target.id === "cerrar" || e.target.id === "zoom") $("#zoom").close();
+  });
+  $("#vaciar").addEventListener("click", () => { sel.clear(); guardar(); render(); consulta(); });
+  $("#categoria").addEventListener("change", (e) => { state.categoria = e.target.value; render(); });
+  $("#buscar").addEventListener("input", (e) => { state.q = e.target.value; render(); });
+  $("#orden").addEventListener("change", (e) => { state.orden = e.target.value; render(); });
+
+  fetch("datos.json", { cache: "no-store" })
+    .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then((d) => {
+      DATA = d;
+      const rango = (c) => { const i = ORDEN_CATEGORIAS.indexOf(c); return i < 0 ? ORDEN_CATEGORIAS.length : i; };
+      DATA.categorias = [...new Set(d.articulos.map((a) => a.categoria))].sort((x, y) => rango(x) - rango(y));
+      const vigentes = new Set(d.articulos.map((a) => a.art));
+      sel = new Set([...sel].filter((x) => vigentes.has(x)));
+      setup(); render(); consulta();
+    })
+    .catch(() => { $("#main").innerHTML = `<div class="empty">No pudimos cargar los repuestos. <button class="enlace" type="button" data-wa="general">Escribinos por WhatsApp</button>.</div>`; });
+})();
+</script>
+</body>
+</html>
